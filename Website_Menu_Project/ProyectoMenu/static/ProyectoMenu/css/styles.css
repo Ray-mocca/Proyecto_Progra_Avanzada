@@ -1,0 +1,12 @@
+/* styles.css */
+.navbar-nav .nav-item .nav-link {
+    padding: 14px 20px;
+    display: block;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+}
+
+.navbar-nav .nav-item .nav-link:hover {
+    background-color: #575757;
+}
