@@ -1,16 +1,52 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block titulo %}Servicios{% endblock %}
 
 {% block contenido %}
     <div class="container mt-4">
-        <h1>Servicios</h1>
-        <p>Ofrecemos una variedad de servicios para satisfacer todas sus necesidades de panadería.</p>
-        <ul>
-            <li>Catering para eventos</li>
-            <li>Pedidos personalizados de pasteles</li>
-            <li>Servicios de entrega</li>
-            <li>Clases de panadería</li>
-        </ul>
+        <h1 class="text-center mb-4">Servicios</h1>
+        <div class="row">
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card h-100">
+                    <img src="{% static 'images/catering.jpg' %}" class="card-img-top" alt="Catering para eventos">
+                    <div class="card-body">
+                        <h5 class="card-title">Catering para eventos</h5>
+                        <p class="card-text">Ofrecemos catering para todo tipo de eventos con una variedad de productos de panadería frescos y deliciosos.</p>
+                        <a href="{% url 'catering' %}" class="btn btn-primary">Más información</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card h-100">
+                    <img src="{% static 'images/pastelcustom.jpg' %}" class="card-img-top" alt="Pedidos personalizados de pasteles">
+                    <div class="card-body">
+                        <h5 class="card-title">Pedidos personalizados de pasteles</h5>
+                        <p class="card-text">Creamos pasteles personalizados para cualquier ocasión especial según sus especificaciones.</p>
+                        <a href="{% url 'custom_cakes' %}" class="btn btn-primary">Más información</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card h-100">
+                    <img src="{% static 'images/express.jpg' %}" class="card-img-top" alt="Servicios de entrega">
+                    <div class="card-body">
+                        <h5 class="card-title">Servicios de entrega</h5>
+                        <p class="card-text">Entregamos productos de panadería frescos directamente a su puerta.</p>
+                        <a href="{% url 'delivery' %}" class="btn btn-primary">Más información</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card h-100">
+                    <img src="{% static 'images/clasecupcakes.jpg' %}" class="card-img-top" alt="Clases de panadería">
+                    <div class="card-body">
+                        <h5 class="card-title">Clases de panadería</h5>
+                        <p class="card-text">Ofrecemos clases de panadería para todos los niveles, desde principiantes hasta avanzados.</p>
+                        <a href="{% url 'baking_classes' %}" class="btn btn-primary">Más información</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 {% endblock %}

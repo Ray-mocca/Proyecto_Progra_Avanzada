@@ -14,6 +14,23 @@ def productos(request):
 def servicios(request):
     return render(request, 'paginas/servicios.html')
     return render(request, 'base.html')
+
 def contacto(request):
     return render(request, 'paginas/contacto.html')
+    return render(request, 'base.html')
+
+def catering(request):
+    return render(request, 'paginas/catering.html')
+    return render(request, 'base.html')
+
+def delivery(request):
+    return render(request, 'paginas/delivery.html')
+    return render(request, 'base.html')
+
+def baking_classes(request):
+    return render(request, 'paginas/baking_classes.html')
+    return render(request, 'base.html')
+
+def custom_cakes(request):
+    return render(request, 'paginas/custom_cakes.html')
     return render(request, 'base.html')
