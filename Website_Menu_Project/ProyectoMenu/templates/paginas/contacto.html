@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block titulo %}Contacto{% endblock %}
+
+{% block contenido %}
+    <div class="container mt-4">
+        <h1>Contacto</h1>
+        <p>Puedes ponerte en contacto con nosotros a través de los siguientes medios:</p>
+        <ul>
+            <li>Dirección: Purruja, Golfito, Costa Rica</li>
+            <li>Teléfono: +506 8394 8017</li>
+            <li>Email: correo@negocio.com</li>
+            <li>Redes sociales:
+                <ul>
+                    <li><a href="#">Facebook</a></li>
+                    <li><a href="#">Instagram</a></li>
+                    <li><a href="#">Twitter</a></li>
+                </ul>
+            </li>
+        </ul>
+        <form>
+            <div class="mb-3">
+                <label for="name" class="form-label">Nombre</label>
+                <input type="text" class="form-control" id="name" placeholder="Tu nombre">
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" placeholder="Tu email">
+            </div>
+            <div class="mb-3">
+                <label for="message" class="form-label">Mensaje</label>
+                <textarea class="form-control" id="message" rows="3" placeholder="Tu mensaje"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Enviar</button>
+        </form>
+    </div>
+{% endblock %}
