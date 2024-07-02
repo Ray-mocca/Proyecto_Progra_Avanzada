@@ -8,6 +8,7 @@ body {
 .productos-destacados {
     text-align: center;
     padding: 20px;
+    margin: 0 auto;
 }
 
 .productos-destacados h1 {
@@ -20,11 +21,12 @@ body {
     background-color: #fff;
     border-radius: 15px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin: 15px;
+    
     max-width: 300px;
     transition: transform 0.2s;
-    text-align: left;
+    text-align: center;
     overflow: hidden;
+    position: relative;
     
 }
 
@@ -37,6 +39,9 @@ body {
     width: 250px;
     height: 250px;
     object-fit: cover;
+    object-position: center;
+    display: block;
+    
 }
 
 .product-card h2 {

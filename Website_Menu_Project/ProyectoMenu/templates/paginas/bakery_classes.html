@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block titulo %}Clases de Panadería{% endblock %}
+
+{% block contenido %}
+    <div class="container mt-4">
+        <h1>Clases de Panadería</h1>
+        <div class="row">
+            {% for clase in bakery_classes %}
+                <div class="col-md-4 mb-4">
+                    <div class="product-card">
+                        <div class="card-body">
+                            <h2 class="card-title">{{ clase.name }}</h2>
+                            <p class="card-text">{{ clase.description }}</p>
+                            <p class="class-level">{{ clase.class_level }}</p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

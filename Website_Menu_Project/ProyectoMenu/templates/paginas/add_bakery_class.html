@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block titulo %}Add Bakery Class{% endblock %}
+
+{% block contenido %}
+<div class="container mt-4">
+    <h1>Add Bakery Class</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Add Bakery Class</button>
+    </form>
+</div>
+{% endblock %}
