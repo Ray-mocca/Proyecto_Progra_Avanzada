@@ -1,5 +1,8 @@
 from django.urls import path
 from . import views
+from .views import CustomLoginView, register
+from django.contrib.auth import views as auth_views
+from django.contrib.auth.decorators import login_required
 
 urlpatterns = [
     path('', views.inicio, name='inicio'),
@@ -13,4 +16,8 @@ urlpatterns = [
     path('add_product/', views.add_product, name='add_product'),
     path('add_bakery_class/', views.add_bakery_class, name='add_bakery_class'),
     path('delete_product/<int:product_id>/', views.delete_product, name='delete_product'),
+    path('about_us/', views.about_us, name='about_us'),
+    path('login/', CustomLoginView.as_view(), name='login'),
+    path('register/', views.register, name='register'),
+    path('logout/', views.Custom_Logout, name='logout'),
 ]
