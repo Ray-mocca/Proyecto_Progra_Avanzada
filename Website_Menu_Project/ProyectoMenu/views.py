@@ -51,41 +51,32 @@ def Custom_Logout(request):
 
 def inicio(request):
     return render(request, 'paginas/inicio.html')
-    return render(request, 'base.html')
 
 def productos(request):
     products = Product.objects.all()
     return render(request, 'paginas/productos.html', {'products': products})
-    return render(request, 'base.html')
-    
+
 def servicios(request):
     return render(request, 'paginas/servicios.html')
-    return render(request, 'base.html')
 
 def contacto(request):
     return render(request, 'paginas/contacto.html')
-    return render(request, 'base.html')
 
 def catering(request):
     return render(request, 'paginas/catering.html')
-    return render(request, 'base.html')
 
 def delivery(request):
     return render(request, 'paginas/delivery.html')
-    return render(request, 'base.html')
 
 def bakery_classes(request):
     classes = BakeryClass.objects.all()
     return render(request, 'paginas/bakery_classes.html', {'bakery_classes': classes})
-    return render(request, 'base.html')
 
 def custom_cakes(request):
     return render(request, 'paginas/custom_cakes.html')
-    return render(request, 'base.html')
 
 def about_us(request):
     return render(request, 'paginas/about_us.html')
-    return render(request, 'base.html')
 
 
 #--------------------- Autenticación de staff y administrador ---------------#
@@ -106,15 +97,14 @@ def manage_products(request):
 
 @user_passes_test(check_superuser)
 def add_product(request):
+    form = ProductForm(request.POST, request.FILES)
     if request.method == 'POST':
-        form = ProductForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             messages.success(request, 'Product added successfully.')
             return redirect('manage_products')
-            return render(request, 'base.html')
-    return redirect('manage_products')
-    return render(request, 'base.html')
+        
+    return render(request, 'paginas/add_product.html', {'form': form})
 
 @user_passes_test(check_superuser)
 def delete_product(request, product_id):
