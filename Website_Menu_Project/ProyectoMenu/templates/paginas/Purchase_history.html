@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block titulo %}Purchase History{% endblock %}
+
+{% block contenido %}
+<div class="container mt-4">
+    <h1>Purchase History</h1>
+    {% if purchases %}
+    {% regroup purchases by order_id as purchase_groups %}
+    <div class="accordion" id="purchaseAccordion">
+        {% for group in purchase_groups %}
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="heading{{ forloop.counter }}">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ forloop.counter }}" aria-expanded="false" aria-controls="collapse{{ forloop.counter }}">
+                    Order ID: {{ group.grouper }} - Date: {{ group.list.0.purchase_date }}
+                </button>
+            </h2>
+            <div id="collapse{{ forloop.counter }}" class="accordion-collapse collapse" aria-labelledby="heading{{ forloop.counter }}" data-bs-parent="#purchaseAccordion">
+                <div class="accordion-body">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Product</th>
+                                <th>Quantity</th>
+                                <th>Price</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for purchase in group.list %}
+                            <tr>
+                                <td>{{ purchase.product.name }}</td>
+                                <td>{{ purchase.quantity }}</td>
+                                <td>₡{{ purchase.product.price|floatformat:2 }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <p>You have no purchase history.</p>
+    {% endif %}
+</div>
+{% endblock %}

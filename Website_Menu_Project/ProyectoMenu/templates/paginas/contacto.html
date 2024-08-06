@@ -33,6 +33,10 @@
             </div>
             <button type="submit" class="btn btn-primary">Enviar</button>
         </form>
+
+        <!-- Mapa de Google Maps -->
+        <h2 class="mt-4">Ubicación</h2>
+        <div id="map" style="height: 300px; width: 80%; margin: 20px auto;"></div>
     </div>
 
     <script type="text/javascript">
@@ -49,6 +53,28 @@
                     alert('Error al enviar el mensaje: ' + JSON.stringify(error));
                 });
         });
+
+        function initMap() {
+            // Define la ubicación del negocio
+            var location = { lat: 8.600992466658742, lng: -83.11566283167582 }; // Reemplaza con las coordenadas correctas
+
+            // Crea un mapa centrado en la ubicación
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 15,
+                center: location
+            });
+
+            // Añade un marcador en la ubicación
+            var marker = new google.maps.Marker({
+                position: location,
+                map: map
+            });
+        }
     </script>
 
+    <!-- Carga la API de Google Maps -->
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCtVmjeGBLeHvawKxc7lGe85JqIcQ0Vh_M
+&callback=initMap">
+    </script>
 {% endblock %}

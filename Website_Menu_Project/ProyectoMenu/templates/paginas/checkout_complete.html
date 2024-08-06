@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block titulo %}Order Confirmation{% endblock %}
+
+{% block contenido %}
+<div class="container mt-4">
+    <h1>Thank You for Your Order!</h1>
+    <p>Your order has been placed successfully.</p>
+    <p>Order ID: {{ order_id }}</p>
+    <p>Order Details:</p>
+    <ul>
+        {% for detail in order_details %}
+        <li>{{ detail }}</li>
+        {% endfor %}
+    </ul>
+    <p>Total Price: ₡{{ total_price|floatformat:2 }}</p>
+
+    <!-- EmailJS Form -->
+    <form id="order-form" style="display:none;">
+        <input type="hidden" name="to_email" value="{{ store_email }}">
+        <input type="hidden" name="order_id" value="{{ order_id }}">
+        <input type="hidden" name="order_details" value="{{ order_details|join:', ' }}">
+        <input type="hidden" name="total_price" value="{{ total_price }}">
+    </form>
+
+    <!-- EmailJS Script -->
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', function() {
+            const serviceID = 'service_xf3rqw1'; // Replace with your EmailJS service ID
+            const templateID = 'template_euk2usq'; // Replace with your EmailJS template ID
+
+            emailjs.sendForm(serviceID, templateID, '#order-form')
+                .then(function(response) {
+                    console.log('Sent successfully', response);
+                }, function(error) {
+                    console.log('Failed to send', error);
+                });
+        });
+    </script>
+</div>
+{% endblock %}

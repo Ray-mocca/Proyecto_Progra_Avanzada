@@ -1,17 +1,20 @@
-from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth.decorators import user_passes_test
-from django.contrib import messages
-from .models import Product, BakeryClass
-from .forms import ProductForm, BakeryClassForm
-from django.http import HttpResponse
-from django.contrib.auth.views import LoginView
-from django.urls import reverse_lazy
 from django import forms
-from django.contrib.auth.forms import AuthenticationForm
-from .forms import CustomUserCreationForm
+from django.contrib import messages
+from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth import login
 from django.contrib.auth import logout as auth_logout
-from django.http import HttpResponseForbidden
+from django.contrib.auth.decorators import user_passes_test, login_required
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.views import LoginView
+from django.db.models import Max
+from django.http import HttpResponse, HttpResponseForbidden
+from django.shortcuts import render, redirect, get_object_or_404
+from django.urls import reverse, reverse_lazy
+from django.utils.decorators import method_decorator
+from django.views.decorators.http import require_POST
+from .forms import ProductForm, BakeryClassForm, CustomUserCreationForm
+from .models import Product, BakeryClass, Cart, Purchase, Customer
+
 
 
 # Create your views here.
@@ -48,6 +51,8 @@ def Custom_Logout(request):
         return redirect('inicio')
     else:
         return HttpResponseForbidden("Invalid request method")
+
+#------------ paginas ----------------#
 
 def inicio(request):
     return render(request, 'paginas/inicio.html')
@@ -115,7 +120,6 @@ def delete_product(request, product_id):
     except Product.DoesNotExist:
         messages.error(request, 'Product not found.')
     return redirect('manage_products')
-    return render(request, 'base.html')
 
 @user_passes_test(check_superuser)
 def add_bakery_class(request):
@@ -127,4 +131,90 @@ def add_bakery_class(request):
     else:
         form = BakeryClassForm()
     return render(request, 'paginas/add_bakery_class.html', {'form': form})
-    return render(request, 'base.html')
+
+# ------------ Purchase section ----------------#
+@login_required
+def add_to_cart(request, product_id):
+    product = Product.objects.get(id=product_id)
+    cart, created = Cart.objects.get_or_create(user=request.user, product=product)
+    if not created:
+        cart.quantity += 1
+        cart.save()
+    
+    return redirect('view_cart')
+    
+@login_required
+def view_cart(request):
+    cart_items = Cart.objects.filter(user=request.user)
+    total_price = sum(float(item.product.price) * item.quantity for item in cart_items)
+    return render(request, 'paginas/cart.html', {'cart_items': cart_items, 'total_price': total_price})
+
+@login_required
+def update_cart(request):
+    if request.method == 'POST':
+        cart_items = Cart.objects.filter(user=request.user)
+        for item in cart_items:
+            quantity_key = f'quantity_{item.product.id}'
+            if quantity_key in request.POST:
+                try:
+                    new_quantity = int(request.POST[quantity_key])
+                    if new_quantity > 0:
+                        item.quantity = new_quantity
+                        item.save()
+                    else:
+                        item.delete()
+                except ValueError:
+                    messages.error(request, 'Invalid quantity provided.')
+    return redirect('view_cart')
+
+
+@login_required
+def checkout(request):
+    cart_items = Cart.objects.filter(user=request.user)
+    customer, created = Customer.objects.get_or_create(user=request.user)
+    total_price = sum(float(item.product.price) * item.quantity for item in cart_items)
+    #Numero Orden de compra
+    last_order = Purchase.objects.aggregate(Max('order_id'))
+    if last_order['order_id__max'] is not None:
+        new_order_id = last_order['order_id__max'] + 1
+    else:
+        new_order_id = 1
+    
+    if request.method == 'POST':
+        order_details = []
+        for item in cart_items:
+            Purchase.objects.create(
+                customer=request.user.customer,
+                product=item.product,
+                quantity=item.quantity,
+                order_id=new_order_id
+            )
+            order_details.append(f"{item.product.name} - Quantity: {item.quantity}")
+        cart_items.delete()
+
+        store_email = "raymondsan95@gmail.com"
+        
+        #Pasar detalles del pedido al frontend
+        context = {
+            'order_id': new_order_id,
+            'order_details': order_details,
+            'total_price': total_price,
+            'store_email': store_email,
+        }
+        return render(request, 'paginas/checkout_complete.html', context)
+    
+    return render(request, 'paginas/checkout.html', {'cart_items': cart_items, 'total_price': total_price})
+
+@login_required
+def purchase_history(request):
+    purchases = Purchase.objects.filter(customer=request.user.customer)
+    return render(request, 'paginas/purchase_history.html', {'purchases': purchases})
+
+#------------ Tabla de pedidos -----------
+@login_required
+@staff_member_required
+def orders_table(request):
+    if not request.user.is_staff:
+        return redirect('inicio')
+    orders = Purchase.objects.all().order_by('order_id')
+    return render(request, 'paginas/tabla_pedidos.html', {'orders': orders})

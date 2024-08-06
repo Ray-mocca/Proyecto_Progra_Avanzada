@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block titulo %}Tabla de Pedidos{% endblock %}
+
+{% block contenido %}
+    <div class="container mt-4">
+        <h1>Tabla de Pedidos</h1>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID de Pedido</th>
+                    <th>Cliente</th>
+                    <th>Producto</th>
+                    <th>Cantidad</th>
+                    <th>Fecha</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for order in orders %}
+                <tr>
+                    <td>{{ order.order_id }}</td>
+                    <td>{{ order.customer.name }}</td>
+                    <td>{{ order.product.name }}</td>
+                    <td>{{ order.quantity }}</td>
+                    <td>{{ order.purchase_date }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

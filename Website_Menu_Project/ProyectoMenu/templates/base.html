@@ -54,7 +54,16 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="{% url 'add_bakery_class' %}">Add Bakery Class</a>
                                 </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'tabla_pedidos' %}">Orders Table</a>
+                                </li>
                             {% endif %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'view_cart' %}">Carrito</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'purchase_history' %}">Historial de compras</a>
+                            </li>
                             <li class="nav-item">
                                 <form method="post" action="{% url 'logout' %}">
                                     {% csrf_token %}

@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, include
 from . import views
 from .views import CustomLoginView, register
 from django.contrib.auth import views as auth_views
@@ -20,4 +20,13 @@ urlpatterns = [
     path('login/', CustomLoginView.as_view(), name='login'),
     path('register/', views.register, name='register'),
     path('logout/', views.Custom_Logout, name='logout'),
+
+    #compras
+
+    path('cart/add/<int:product_id>/', views.add_to_cart, name='add_to_cart'),
+    path('cart/', views.view_cart, name='view_cart'),
+    path('checkout/', views.checkout, name='checkout'),
+    path('purchase_history/', views.purchase_history, name='purchase_history'),
+    path('update_cart/', views.update_cart, name='update_cart'),
+    path('orders/', views.orders_table, name='tabla_pedidos'),
 ]

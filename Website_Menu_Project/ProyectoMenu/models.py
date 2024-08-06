@@ -1,5 +1,6 @@
 from django.db import models
 
+
 # Create your models here.
 
 class Product(models.Model):
@@ -10,10 +11,18 @@ class Product(models.Model):
 
     def __str__(self):
         return self.name
+    
+class Cart(models.Model):
+    user = models.ForeignKey('auth.User', on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField(default=1)
+    added_at = models.DateTimeField(auto_now_add=True)
+
 
 class CateringRequest(models.Model):
     client_name = models.CharField(max_length=100)
     phone_number = models.CharField(max_length=20)
+    email = models.EmailField(null=True, blank=True)
     address = models.CharField(max_length=255)
     requested_items = models.TextField()
     price = models.DecimalField(max_digits=10, decimal_places=2)
@@ -25,6 +34,7 @@ class CateringRequest(models.Model):
 class CustomCakeRequest(models.Model):
     client_name = models.CharField(max_length=100)
     phone_number = models.CharField(max_length=20)
+    email = models.EmailField(null=True, blank=True)
     description = models.TextField()
     price_inquiry = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -35,6 +45,7 @@ class CustomCakeRequest(models.Model):
 class DeliveryRequest(models.Model):
     client_name = models.CharField(max_length=100)
     phone_number = models.CharField(max_length=20)
+    email = models.EmailField(null=True, blank=True)
     address = models.CharField(max_length=255)
     requested_items = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
@@ -56,8 +67,10 @@ class BakeryClass(models.Model):
         return f"{self.class_level} Class: {self.name}"
 
 class Customer(models.Model):
+    user = models.OneToOneField('auth.User', on_delete=models.CASCADE, default = 1)
     name = models.CharField(max_length=100)
     phone_number = models.CharField(max_length=20)
+    email = models.EmailField(null=True, blank=True)
     
     def __str__(self):
         return f"{self.name})"
@@ -65,10 +78,17 @@ class Customer(models.Model):
 class Purchase(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField(default=1)
     purchase_date = models.DateTimeField(auto_now_add=True)
+    order_id = models.PositiveIntegerField()
 
     def __str__(self):
-        return f"{self.customer.name} purchased {self.quantity} {self.product.name} ({self.created_at})"
+        return f"{self.customer.name} purchased {self.quantity} {self.product.name} ({self.purchase_date})"
+    
+class PurchaseHistory(models.Model):
+    customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    purchase = models.ForeignKey(Purchase, on_delete=models.CASCADE)
+    purchase_date = models.DateTimeField(auto_now_add=True)                                 
 
 class Student(models.Model):
     name = models.CharField(max_length=100)
