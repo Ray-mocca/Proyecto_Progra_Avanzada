@@ -93,14 +93,16 @@ def check_superuser(user):
 
 #---------------------- Vista de añadir productos y clases ----------------------#
 
-@user_passes_test(check_superuser)
+@login_required
+@staff_member_required
 def manage_products(request):
     print("View function hit!")
     products = Product.objects.all()
     return render(request, 'manage_products.html', {'products': products})
     return render(request, 'base.html')
 
-@user_passes_test(check_superuser)
+@login_required
+@staff_member_required
 def add_product(request):
     form = ProductForm(request.POST, request.FILES)
     if request.method == 'POST':
@@ -111,7 +113,8 @@ def add_product(request):
         
     return render(request, 'paginas/add_product.html', {'form': form})
 
-@user_passes_test(check_superuser)
+@login_required
+@staff_member_required
 def delete_product(request, product_id):
     try:
         product = Product.objects.get(id=product_id)
@@ -121,7 +124,8 @@ def delete_product(request, product_id):
         messages.error(request, 'Product not found.')
     return redirect('manage_products')
 
-@user_passes_test(check_superuser)
+@login_required
+@staff_member_required
 def add_bakery_class(request):
     if request.method == 'POST':
         form = BakeryClassForm(request.POST)
