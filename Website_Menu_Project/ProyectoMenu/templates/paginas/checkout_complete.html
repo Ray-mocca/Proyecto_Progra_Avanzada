@@ -14,12 +14,17 @@
     </ul>
     <p>Total Price: ₡{{ total_price|floatformat:2 }}</p>
 
+    <p>Customer Address: {{ customer_address }}</p>
+    <p>Customer Phone: {{ customer_phone }}</p>
+
     <!-- EmailJS Form -->
     <form id="order-form" style="display:none;">
         <input type="hidden" name="to_email" value="{{ store_email }}">
         <input type="hidden" name="order_id" value="{{ order_id }}">
         <input type="hidden" name="order_details" value="{{ order_details|join:', ' }}">
         <input type="hidden" name="total_price" value="{{ total_price }}">
+        <input type="hidden" name="customer_address" value="{{ customer_address }}">
+        <input type="hidden" name="customer_phone" value="{{ customer_phone }}">
     </form>
 
     <!-- EmailJS Script -->

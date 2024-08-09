@@ -14,13 +14,14 @@ urlpatterns = [
     path('bakery_classes/', views.bakery_classes, name='bakery_classes'),
     path('custom_cakes/', views.custom_cakes, name='custom_cakes'),
     path('add_product/', views.add_product, name='add_product'),
+    path('manage_products/', views.manage_products, name='manage_products'),
     path('add_bakery_class/', views.add_bakery_class, name='add_bakery_class'),
     path('delete_product/<int:product_id>/', views.delete_product, name='delete_product'),
     path('about_us/', views.about_us, name='about_us'),
     path('login/', CustomLoginView.as_view(), name='login'),
     path('register/', views.register, name='register'),
     path('logout/', views.Custom_Logout, name='logout'),
-
+    path('profile/', views.profile, name='profile'),
     #compras
 
     path('cart/add/<int:product_id>/', views.add_to_cart, name='add_to_cart'),

@@ -71,3 +71,19 @@ body {
     height: 200px;
     object-fit: cover;
 }
+
+.btn-logout {
+    background-color: #007bff; /* Color de fondo más visible */
+    color: #fff; /* Color del texto */
+    border: 1px solid #007bff; /* Color del borde */
+    padding: 10px 20px; /* Añade un poco de padding para hacerlo más visible */
+    border-radius: 5px; /* Bordes redondeados */
+    text-align: center; /* Centrar el texto */
+    font-size: 16px; /* Tamaño de fuente */
+}
+
+.btn-logout:hover {
+    background-color: #0056b3; /* Color de fondo al pasar el mouse */
+    border-color: #0056b3; /* Color del borde al pasar el mouse */
+    text-decoration: none; /* Evita subrayado si aplica */
+}

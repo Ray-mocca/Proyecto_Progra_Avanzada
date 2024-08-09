@@ -25,7 +25,7 @@
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container-fluid">
-                <a class="navbar-brand" href="{% url 'inicio' %}">Panaderia</a>
+                <a class="navbar-brand" href="{% url 'inicio' %}">Panadería</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -49,25 +49,28 @@
                         {% if user.is_authenticated %}
                             {% if user.is_staff %}
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{% url 'add_product' %}">Add Product</a>
+                                    <a class="nav-link" href="{% url 'add_product' %}">Añadir Producto</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{% url 'add_bakery_class' %}">Add Bakery Class</a>
+                                    <a class="nav-link" href="{% url 'add_bakery_class' %}">Añadir Clase de Panadería</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{% url 'tabla_pedidos' %}">Orders Table</a>
+                                    <a class="nav-link" href="{% url 'tabla_pedidos' %}">Tabla de Pedidos</a>
                                 </li>
                             {% endif %}
                             <li class="nav-item">
                                 <a class="nav-link" href="{% url 'view_cart' %}">Carrito</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{% url 'purchase_history' %}">Historial de compras</a>
+                                <a class="nav-link" href="{% url 'purchase_history' %}">Historial de Compras</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'profile' %}">Perfil</a>
                             </li>
                             <li class="nav-item">
                                 <form method="post" action="{% url 'logout' %}">
                                     {% csrf_token %}
-                                    <button type="submit" class="btn btn-outline-light">Logout</button>
+                                    <button type="submit" class="btn btn-logout">Logout</button>
                                 </form>
                             </li>
                         {% else %}
@@ -75,7 +78,7 @@
                                 <a class="nav-link" href="{% url 'login' %}">Login</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{% url 'register' %}">Sign Up</a>
+                                <a class="nav-link" href="{% url 'register' %}">Registrarse</a>
                             </li>
                         {% endif %}
                     </ul>
@@ -83,6 +86,7 @@
             </div>
         </nav>
     </header>
+    
     <main>
         {% block contenido %}  {% endblock %}
     </main>

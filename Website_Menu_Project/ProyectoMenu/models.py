@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.core.validators import RegexValidator
 
 # Create your models here.
 
@@ -67,10 +67,11 @@ class BakeryClass(models.Model):
         return f"{self.class_level} Class: {self.name}"
 
 class Customer(models.Model):
-    user = models.OneToOneField('auth.User', on_delete=models.CASCADE, default = 1)
+    user = models.OneToOneField('auth.User', on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
-    phone_number = models.CharField(max_length=20)
+    phone_number = models.CharField(max_length=20, validators=[RegexValidator(r'^\d{9,15}$', message='Enter a valid phone number.')])
     email = models.EmailField(null=True, blank=True)
+    address = models.CharField(max_length=255, null=True, blank=True)
     
     def __str__(self):
         return f"{self.name})"
@@ -92,7 +93,7 @@ class PurchaseHistory(models.Model):
 
 class Student(models.Model):
     name = models.CharField(max_length=100)
-    phone_number = models.CharField(max_length=20)
+    phone_number = models.CharField(max_length=20, validators=[RegexValidator(r'^\d{9,15}$', message='Enter a valid phone number.')])
 
     def __str__(self):
         return self.name

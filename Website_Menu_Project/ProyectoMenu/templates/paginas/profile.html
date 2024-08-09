@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block titulo %}Perfil{% endblock %}
+
+{% block contenido %}
+<div class="container mt-4">
+    <h2>Mi Perfil</h2>
+    <form method="post" action="{% url 'profile' %}">
+        {% csrf_token %}
+        {{ form.name|as_crispy_field }}
+        {{ form.phone_number|as_crispy_field }}
+        {{ form.address|as_crispy_field }}
+        <div class="form-group mt-3">
+            <button type="submit" class="btn btn-primary">Actualizar Perfil</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

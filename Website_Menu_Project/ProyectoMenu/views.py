@@ -1,4 +1,5 @@
 from django import forms
+from django.db import IntegrityError
 from django.contrib import messages
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth import login
@@ -12,7 +13,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse, reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.decorators.http import require_POST
-from .forms import ProductForm, BakeryClassForm, CustomUserCreationForm
+from .forms import ProductForm, BakeryClassForm, CustomUserCreationForm, CustomerForm, ProfileForm
 from .models import Product, BakeryClass, Cart, Purchase, Customer
 
 
@@ -30,6 +31,8 @@ def register(request):
     else:
         form = CustomUserCreationForm()
     return render(request, 'paginas/register.html', {'form': form})
+
+
 
 #Login View
 class CustomLoginView(LoginView):
@@ -51,6 +54,22 @@ def Custom_Logout(request):
         return redirect('inicio')
     else:
         return HttpResponseForbidden("Invalid request method")
+    
+
+#Update Profile view
+
+@login_required
+def profile(request):
+    customer, created = Customer.objects.get_or_create(user=request.user)
+    if request.method == 'POST':
+        form = ProfileForm(request.POST, instance=customer)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Profile updated successfully.')
+            return redirect('profile')
+    else:
+        form = ProfileForm(instance=customer)
+    return render(request, 'paginas/profile.html', {'form': form})
 
 #------------ paginas ----------------#
 
@@ -98,8 +117,8 @@ def check_superuser(user):
 def manage_products(request):
     print("View function hit!")
     products = Product.objects.all()
-    return render(request, 'manage_products.html', {'products': products})
-    return render(request, 'base.html')
+    return render(request, 'paginas/productos.html', {'products': products})
+    
 
 @login_required
 @staff_member_required
@@ -197,6 +216,8 @@ def checkout(request):
         cart_items.delete()
 
         store_email = "raymondsan95@gmail.com"
+        customer_address = customer.address if customer.address else "N/A"
+        customer_phone = customer.phone_number if customer.phone_number else "N/A"
         
         #Pasar detalles del pedido al frontend
         context = {
@@ -204,6 +225,8 @@ def checkout(request):
             'order_details': order_details,
             'total_price': total_price,
             'store_email': store_email,
+            'customer_address': customer_address,
+            'customer_phone': customer_phone,
         }
         return render(request, 'paginas/checkout_complete.html', context)
     
