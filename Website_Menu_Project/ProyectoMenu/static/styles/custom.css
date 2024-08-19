@@ -1,89 +1,128 @@
+/* Typography Enhancements */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Merriweather', serif; /* Elegant serif font */
+    color: #333333;
+}
+
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f9f9f9;
+    font-family: 'Poppins', sans-serif; /* Clean, modern sans-serif */
+    background-color: #ffffff;
+    color: #555555;
 }
 
-.productos-destacados {
-    text-align: center;
-    padding: 20px;
-    margin: 0 auto;
+/* Navigation Bar Styling */
+.navbar {
+    background-color: #ffffff;
+    padding: 1rem 0;
 }
 
-.productos-destacados h1 {
-    font-size: 2em;
-    margin-bottom: 20px;
+.navbar-brand img {
+    max-height: 50px;
 }
 
+.nav-link {
+    color: #555555 !important;
+    font-weight: 600;
+    margin-right: 15px;
+}
+
+.nav-link:hover {
+    color: #007bff !important; /* Primary color on hover */
+}
+
+/* Hero Section */
+.hero-section {
+    background-color: rgba(0, 0, 0, 0.5);
+    background-blend-mode: darken;
+    color: #ffffff;
+    padding: 100px 0;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+/* Product Cards */
 .product-card {
-    display: inline-block;
-    background-color: #fff;
-    border-radius: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    
-    max-width: 300px;
-    transition: transform 0.2s;
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: #ffffff;
+    border-radius: 10px;
+    transition: transform 0.3s, box-shadow 0.3s;
     overflow: hidden;
-    position: relative;
-    
-}
-
-.product-card:hover {
-    transform: scale(1.05);
+    height: 100%; /* Ensures all cards take up the same height */
 }
 
 .product-card img {
-    border-radius: 15px 15px 0 0;
-    width: 250px;
-    height: 250px;
+    width: 100%;
+    height: 200px; /* Set a fixed height for images */
     object-fit: cover;
-    object-position: center;
-    display: block;
-    
 }
 
-.product-card h2 {
-    font-size: 1.5em;
-    margin: 15px;
+.product-card .card-body {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
-.product-card p {
-    margin: 0 15px 15px;
+.product-card .card-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #333333;
+    margin-bottom: 15px;
 }
 
 .product-card .price {
+    color: #007bff;
+    font-weight: 700;
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+}
+
+.product-card .btn {
+    margin-top: auto; /* Ensure the button is always at the bottom */
+}
+
+
+/* Button Enhancements */
+.btn-primary {
+    background-color: #007bff;
+    border: none;
     font-weight: bold;
-    color: #333;
-    margin: 0 15px 15px;
+    padding: 10px 20px;
+    transition: background-color 0.3s;
 }
 
-.card {
-    transition: transform 0.2s;
+.btn-primary:hover {
+    background-color: #0056b3;
 }
 
-.card:hover {
-    transform: scale(1.05);
+/* Footer Styling */
+footer {
+    background-color: #333333;
+    color: #ffffff;
+    padding: 40px 0;
 }
 
-.card-img-top {
-    height: 200px;
-    object-fit: cover;
+footer a {
+    color: #007bff;
+    text-decoration: none;
 }
 
-.btn-logout {
-    background-color: #007bff; /* Color de fondo más visible */
-    color: #fff; /* Color del texto */
-    border: 1px solid #007bff; /* Color del borde */
-    padding: 10px 20px; /* Añade un poco de padding para hacerlo más visible */
-    border-radius: 5px; /* Bordes redondeados */
-    text-align: center; /* Centrar el texto */
-    font-size: 16px; /* Tamaño de fuente */
+footer a:hover {
+    color: #0056b3;
 }
 
-.btn-logout:hover {
-    background-color: #0056b3; /* Color de fondo al pasar el mouse */
-    border-color: #0056b3; /* Color del borde al pasar el mouse */
-    text-decoration: none; /* Evita subrayado si aplica */
+footer h5 {
+    font-weight: 700;
+}
+
+footer .btn-primary {
+    background-color: #0056b3;
+    border: none;
+    font-weight: bold;
+    padding: 10px 20px;
+}
+
+footer .btn-primary:hover {
+    background-color: #003a80;
 }

@@ -74,6 +74,7 @@ def profile(request):
 #------------ paginas ----------------#
 
 def inicio(request):
+    featured_products = Product.objects.filter(featured=True)[:4]
     return render(request, 'paginas/inicio.html')
 
 def productos(request):

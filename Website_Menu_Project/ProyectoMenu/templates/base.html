@@ -3,36 +3,39 @@
 <!doctype html>
 <html lang="es">
 <head>
-    <title>{% block titulo %} Panaderia {% endblock %}</title>
-    
+    <title>{% block titulo %}Panadería Deliciosa{% endblock %}</title>
+
     <!-- Required meta tags -->
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS v5.2.1 -->
-    <link
-        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-        rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
-        crossorigin="anonymous"
-    />
-    <!-- CSS File for product cards-->
-    <link rel="stylesheet" href="{% static 'styles/custom.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
     
-</head>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'styles/custom.css' %}">
+
+</head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="{% url 'inicio' %}">Panadería</a>
+        <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+            <div class="container">
+                <a class="navbar-brand" href="{% url 'inicio' %}">
+                    <img src="{% static 'images/logo.png' %}" alt="Panadería Deliciosa" height="50">
+                </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav">
+                    <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="{% url 'inicio' %}">Inicio</a>
+                            <a class="nav-link" href="{% url 'inicio' %}">Inicio</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'productos' %}">Productos</a>
@@ -41,10 +44,10 @@
                             <a class="nav-link" href="{% url 'servicios' %}">Servicios</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'contacto' %}">Contacto</a>
+                            <a class="nav-link" href="{% url 'about_us' %}">Sobre Nosotros</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'about_us' %}">Acerca de nosotros</a>
+                            <a class="nav-link" href="{% url 'contacto' %}">Contacto</a>
                         </li>
                         {% if user.is_authenticated %}
                             {% if user.is_staff %}
@@ -52,25 +55,22 @@
                                     <a class="nav-link" href="{% url 'add_product' %}">Añadir Producto</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{% url 'add_bakery_class' %}">Añadir Clase de Panadería</a>
-                                </li>
-                                <li class="nav-item">
                                     <a class="nav-link" href="{% url 'tabla_pedidos' %}">Tabla de Pedidos</a>
                                 </li>
                             {% endif %}
                             <li class="nav-item">
-                                <a class="nav-link" href="{% url 'view_cart' %}">Carrito</a>
+                                <a class="nav-link" href="{% url 'view_cart' %}"><i class="fa fa-shopping-cart"></i> Carrito</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{% url 'purchase_history' %}">Historial de Compras</a>
+                                <a class="nav-link" href="{% url 'purchase_history' %}"><i class="fa fa-history"></i> Historial de Compras</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{% url 'profile' %}">Perfil</a>
+                                <a class="nav-link" href="{% url 'profile' %}"><i class="fa fa-user"></i> Perfil</a>
                             </li>
                             <li class="nav-item">
                                 <form method="post" action="{% url 'logout' %}">
                                     {% csrf_token %}
-                                    <button type="submit" class="btn btn-logout">Logout</button>
+                                    <button type="submit" class="btn btn-link nav-link">Logout</button>
                                 </form>
                             </li>
                         {% else %}
@@ -86,34 +86,39 @@
             </div>
         </nav>
     </header>
-    
+
     <main>
-        {% block contenido %}  {% endblock %}
+        {% block contenido %}{% endblock %}
     </main>
-    <footer>
-        <!-- place footer here -->
+
+    <footer class="bg-dark text-white py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>Contacto</h5>
+                    <p>Email: info@panaderiadeliciosa.com</p>
+                    <p>Teléfono: +123 456 7890</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>Síguenos</h5>
+                    <a href="#" class="text-white me-2"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="text-white me-2"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="text-white"><i class="fab fa-twitter"></i></a>
+                </div>
+                <div class="col-md-4">
+                    <h5>Newsletter</h5>
+                    <form>
+                        <input type="email" class="form-control mb-2" placeholder="Tu email">
+                        <button class="btn btn-primary">Suscríbete</button>
+                    </form>
+                </div>
+            </div>
+            <p class="text-center mt-3">&copy; 2024 Panadería Deliciosa. Todos los derechos reservados.</p>
+        </div>
     </footer>
+
     <!-- Bootstrap JavaScript Libraries -->
-    <script
-        src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
-        crossorigin="anonymous"
-    ></script>
-    <script
-        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
-        integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
-        crossorigin="anonymous"
-    ></script>
-    <!--Emailjs script-->
-    <script type="text/javascript"
-    src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
-    </script>
-    <script type="text/javascript">
-    (function(){
-        emailjs.init({
-            publicKey: "hAEYJJs7Ob6946ql1",
-        });
-    })();
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
 </body>
 </html>

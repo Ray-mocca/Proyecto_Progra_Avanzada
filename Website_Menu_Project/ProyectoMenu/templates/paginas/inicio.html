@@ -6,45 +6,50 @@
 {% block contenido %}
 <div class="container mt-4">
     <!-- Hero Section -->
-    <div class="jumbotron text-center bg-light py-5">
+    <div class="hero-section text-center text-white py-5" style="background-image: url('{% static 'images/hero_bakery.jpg' %}'); background-size: cover; background-position: center;">
         <h1 class="display-4">Bienvenidos a Panadería Deliciosa</h1>
         <p class="lead">Descubre los sabores más frescos y deliciosos de la ciudad.</p>
-        <a class="btn btn-primary btn-lg" href="{% url 'productos' %}" role="button">Ver Productos</a>
+        <a class="btn btn-outline-light btn-lg mt-3" href="{% url 'productos' %}" role="button">Ver Productos</a>
     </div>
 
     <!-- Featured Products Section -->
     <section class="my-5">
         <h2 class="text-center mb-4">Productos Destacados</h2>
         <div class="row">
-            <!-- Example of a product card -->
+            {% for product in featured_products %}
             <div class="col-md-4">
-                <div class="card">
-                    <img src="{% static 'images/Chipscake.jpg' %}" class="card-img-top" alt="Producto 1">
-                    <div class="card-body">
-                        <h5 class="card-title">Producto 1</h5>
-                        <p class="card-text">Una breve descripción del producto.</p>
-                        <a href="{% url 'productos' %}" class="btn btn-primary">Comprar Ahora</a>
+                <div class="card product-card shadow-sm border-0">
+                    <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">{{ product.name }}</h5>
+                        <p class="card-text">{{ product.description }}</p>
+                        <p class="price text-primary fs-4">₡{{ product.price }}</p>
+                        <a href="{% url 'productos' %}" class="btn btn-primary btn-sm">Comprar Ahora</a>
                     </div>
                 </div>
             </div>
-            <!-- Repeat similar structure for other featured products -->
+            {% endfor %}
         </div>
     </section>
 
     <!-- Special Offers Section -->
-    <section class="bg-dark text-light py-5">
+    <section class="py-5" style="background-color: #f8f9fa;">
         <div class="container">
             <h2 class="text-center mb-4">Ofertas Especiales</h2>
             <div class="row">
-                <div class="col-md-6">
-                    <h3>Promoción de Verano</h3>
-                    <p>Obtén un 20% de descuento en todos nuestros pasteles durante el mes de julio.</p>
-                    <a href="{% url 'productos' %}" class="btn btn-light">Ver Más</a>
+                <div class="col-md-6 mb-4">
+                    <div class="p-4 bg-white shadow-sm rounded">
+                        <h3>Promoción de Verano</h3>
+                        <p>Obtén un 20% de descuento en todos nuestros pasteles durante el mes de julio.</p>
+                        <a href="{% url 'productos' %}" class="btn btn-primary btn-sm">Ver Más</a>
+                    </div>
                 </div>
                 <div class="col-md-6">
-                    <h3>Descuento para Nuevos Clientes</h3>
-                    <p>Regístrate y obtén un 10% de descuento en tu primer pedido.</p>
-                    <a href="{% url 'register' %}" class="btn btn-light">Regístrate Ahora</a>
+                    <div class="p-4 bg-white shadow-sm rounded">
+                        <h3>Descuento para Nuevos Clientes</h3>
+                        <p>Regístrate y obtén un 10% de descuento en tu primer pedido.</p>
+                        <a href="{% url 'register' %}" class="btn btn-primary btn-sm">Regístrate Ahora</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -55,35 +60,36 @@
         <h2 class="text-center mb-4">Opiniones de Clientes</h2>
         <div class="row">
             <div class="col-md-4">
-                <div class="card">
+                <div class="card border-0 shadow-sm">
                     <div class="card-body">
-                        <p class="card-text">"¡Los mejores panes que he probado! Muy recomendable."</p>
-                        <p class="card-footer">- Juan Pérez</p>
+                        <blockquote class="blockquote mb-0">
+                            <p class="card-text">"¡Los mejores panes que he probado! Muy recomendable."</p>
+                            <footer class="blockquote-footer">Juan Pérez</footer>
+                        </blockquote>
                     </div>
                 </div>
             </div>
             <div class="col-md-4">
-                    <div class="card">
-                        <div class="card-body">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body">
+                        <blockquote class="blockquote mb-0">
                             <p class="card-text">"¡La mejor tarta de queso que he probado en mi vida! La textura es cremosa y el sabor es simplemente divino."</p>
-                            <p class="card-footer">- Sofía Hernández</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <p class="card-text">"El café con leche es mi favorito. Viene con un diseño bonito en la espuma, ¡como en una cafetería de moda!"</p>
-                            <p class="card-footer">- David Santos</p>
-                        </div>
+                            <footer class="blockquote-footer">Sofía Hernández</footer>
+                        </blockquote>
                     </div>
                 </div>
             </div>
-            <!-- Repeat similar structure for other reviews -->
+            <div class="col-md-4">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body">
+                        <blockquote class="blockquote mb-0">
+                            <p class="card-text">"El café con leche es mi favorito. Viene con un diseño bonito en la espuma, ¡como en una cafetería de moda!"</p>
+                            <footer class="blockquote-footer">David Santos</footer>
+                        </blockquote>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
-
-
-    
 </div>
 {% endblock %}

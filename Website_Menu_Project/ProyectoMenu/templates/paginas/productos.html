@@ -5,22 +5,25 @@
 
 {% block contenido %}
     <div class="container mt-4">
-        <h1>Productos</h1>
-        <p>Lista de productos disponibles en nuestra panadería.</p>
-        <section class="productos">
+        <h1 class="mb-4">Nuestros Productos</h1>
+        <section class="row g-4">
             {% for product in products %}
-            <div class="product-card">
-                <img src="{{ product.image.url }}" alt="{{ product.name }}">
-                <h2>{{ product.name }}</h2>
-                <p>{{ product.description }}</p>
-                <p class="price">₡{{ product.price }}</p>
-                {% if user.is_authenticated and user.is_staff %}
-                <a href="{% url 'delete_product' product.id %}" class="btn btn-danger">Delete</a>
-                {% endif %}
-                <form method="post" action="{% url 'add_to_cart' product.id %}">
-                    {% csrf_token %}
-                    <button type="submit" class="btn btn-primary">Agregar al Carrito</button>
-                </form>
+            <div class="col-md-4">
+                <div class="card product-card border-0 shadow-sm">
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}" class="card-img-top">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">{{ product.name }}</h5>
+                        <p class="card-text">{{ product.description }}</p>
+                        <p class="price text-primary fs-4">₡{{ product.price }}</p>
+                        {% if user.is_authenticated and user.is_staff %}
+                        <a href="{% url 'delete_product' product.id %}" class="btn btn-danger btn-sm">Eliminar</a>
+                        {% endif %}
+                        <form method="post" action="{% url 'add_to_cart' product.id %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-primary btn-sm mt-2">Agregar al Carrito</button>
+                        </form>
+                    </div>
+                </div>
             </div>
             {% endfor %}
         </section>
