@@ -27,6 +27,7 @@ def register(request):
         if form.is_valid():
             user = form.save()
             login(request, user)
+            messages.success(request, 'Bienvenido a Panadería Deliciosa. Por favor, completa tu perfil.')
             return redirect('inicio')
     else:
         form = CustomUserCreationForm()
@@ -74,7 +75,7 @@ def profile(request):
 #------------ paginas ----------------#
 
 def inicio(request):
-    featured_products = Product.objects.filter(featured=True)[:4]
+    featured_products = Product.objects.filter(featured=True)[:3]
     return render(request, 'paginas/inicio.html', {'featured_products': featured_products})
 
 def productos(request):

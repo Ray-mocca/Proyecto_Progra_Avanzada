@@ -74,7 +74,7 @@ class BakeryClass(models.Model):
 class Customer(models.Model):
     user = models.OneToOneField('auth.User', on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
-    phone_number = models.CharField(max_length=20, validators=[RegexValidator(r'^\d{9,15}$', message='Enter a valid phone number.')])
+    phone_number = models.CharField(max_length=8, validators=[RegexValidator(r'^\d{8}$', message='Introduce un número de teléfono válido de 8 dígitos.')])
     email = models.EmailField(null=True, blank=True)
     address = models.CharField(max_length=255, null=True, blank=True)
     
@@ -98,7 +98,7 @@ class PurchaseHistory(models.Model):
 
 class Student(models.Model):
     name = models.CharField(max_length=100)
-    phone_number = models.CharField(max_length=20, validators=[RegexValidator(r'^\d{9,15}$', message='Enter a valid phone number.')])
+    phone_number = models.CharField(max_length=8, validators=[RegexValidator(r'^\d{8}$', message='Introduce un número de teléfono válido de 8 dígitos.')])
 
     def __str__(self):
         return self.name

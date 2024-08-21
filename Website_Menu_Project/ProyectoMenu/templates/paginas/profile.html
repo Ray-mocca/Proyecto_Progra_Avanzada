@@ -6,6 +6,16 @@
 {% block contenido %}
 <div class="container mt-4">
     <h1 class="text-center mb-4">Mi Perfil</h1>
+
+    <!-- Mostrar mensajes -->
+    {% if messages %}
+        <div class="alert alert-info" role="alert">
+            {% for message in messages %}
+                {{ message }}
+            {% endfor %}
+        </div>
+    {% endif %}
+
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card shadow-sm border-0">
@@ -32,5 +42,3 @@
     </div>
 </div>
 {% endblock %}
-
-

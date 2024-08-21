@@ -51,9 +51,10 @@ class CustomUserCreationForm(UserCreationForm):
 
 class CustomerForm(forms.ModelForm):
     phone_number = forms.CharField(
-        max_length=15,
+        max_length=8,
+        min_length=8,
         widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Phone Number'}),
-        help_text="Enter your phone number without the country code. Up to 15 digits allowed."
+        help_text="Enter your phone number without the country code. Up to 8 digits allowed."
     )
 
     class Meta:
@@ -69,9 +70,10 @@ class CustomerForm(forms.ModelForm):
 class ProfileForm(forms.ModelForm):
 
     phone_number = forms.CharField(
-        max_length=15,
+        max_length=8,
+        min_length=8,
         widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Phone Number'}),
-        help_text="Enter your phone number without the country code. Up to 15 digits allowed."
+        help_text="Enter your phone number without the country code. Up to 8 digits allowed."
     )
     class Meta:
         model = Customer
