@@ -1,15 +1,60 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block titulo %}Add Bakery Class{% endblock %}
+
+{% block titulo %}Añadir Clase de Panadería{% endblock %}
 
 {% block contenido %}
 <div class="container mt-4">
-    <h1>Add Bakery Class</h1>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="btn btn-primary">Add Bakery Class</button>
-    </form>
+    <h1 class="mb-4 text-center">Añadir Clase de Panadería</h1>
+
+    <div class="card shadow-sm border-0 p-4">
+        <form method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="id_name" class="form-label">Nombre de la Clase</label>
+                {{ form.name }}
+            </div>
+            <div class="mb-3">
+                <label for="id_description" class="form-label">Descripción</label>
+                {{ form.description }}
+            </div>
+            <div class="mb-3">
+                <label for="id_date" class="form-label">Fecha</label>
+                {{ form.date }}
+            </div>
+            <div class="mb-3">
+                <label for="id_time" class="form-label">Hora</label>
+                {{ form.time }}
+            </div>
+            <div class="mb-3">
+                <label for="id_class_level" class="form-label">Nivel de la Clase</label>
+                {{ form.class_level }}
+            </div>
+            <button type="submit" class="btn btn-primary">Añadir Clase</button>
+        </form>
+    </div>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        flatpickr("#id_date", {
+            locale: "es",  // Configura el idioma español
+            altInput: true,
+            altFormat: "d/m/Y",  // "Martes, 20 de agosto, 2024 | 20/08/2024"
+            dateFormat: "d/m/Y",  // El formato del valor enviado al servidor
+            defaultDate: "today",  // Fecha por defecto (hoy)
+        });
+
+        flatpickr("#id_time", {
+            enableTime: true,
+            noCalendar: true,
+            dateFormat: "H:i",
+            time_24hr: false,  // Formato de 24 horas
+            locale: "es"  // Configura el idioma español para el selector de tiempo (opcional)
+        });
+    });
+</script>
+
+
 {% endblock %}

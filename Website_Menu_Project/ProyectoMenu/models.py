@@ -1,5 +1,7 @@
 from django.db import models
 from django.core.validators import RegexValidator
+import datetime
+
 
 # Create your models here.
 
@@ -56,12 +58,14 @@ class DeliveryRequest(models.Model):
 
 class BakeryClass(models.Model):
     CLASS_LEVELS =[
-        ('Beginner', 'Beginner'),
-        ('Mid', 'Mid'),
-        ('Advanced', 'Advanced'),
+        ('Principiante', 'Principiante'),
+        ('Intermedio', 'Intermedio'),
+        ('Avanzado', 'Avanzado'),
     ]
     name = models.CharField(max_length=100)
     description = models.TextField()
+    date = models.DateField(default=datetime.date.today)
+    time = models.TimeField(default= datetime.datetime.now().time())
     class_level = models.CharField(max_length=20, choices=CLASS_LEVELS)
 
     def __str__(self):

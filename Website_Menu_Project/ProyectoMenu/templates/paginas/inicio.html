@@ -6,31 +6,37 @@
 {% block contenido %}
 <div class="container mt-4">
     <!-- Hero Section -->
-    <div class="hero-section text-center text-white py-5" style="background-image: url('{% static 'images/hero_bakery.jpg' %}'); background-size: cover; background-position: center;">
+    <div class="hero-section text-center text-white py-5" style="background-color: #A7C7E7;">
         <h1 class="display-4">Bienvenidos a Panadería Deliciosa</h1>
         <p class="lead">Descubre los sabores más frescos y deliciosos de la ciudad.</p>
         <a class="btn btn-outline-light btn-lg mt-3" href="{% url 'productos' %}" role="button">Ver Productos</a>
     </div>
+    
 
     <!-- Featured Products Section -->
     <section class="my-5">
         <h2 class="text-center mb-4">Productos Destacados</h2>
         <div class="row">
-            {% for product in featured_products %}
-            <div class="col-md-4">
-                <div class="card product-card shadow-sm border-0">
-                    <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">{{ product.name }}</h5>
-                        <p class="card-text">{{ product.description }}</p>
-                        <p class="price text-primary fs-4">₡{{ product.price }}</p>
-                        <a href="{% url 'productos' %}" class="btn btn-primary btn-sm">Comprar Ahora</a>
+            {% if featured_products %}
+                {% for product in featured_products %}
+                    <div class="col-md-4">
+                        <div class="card product-card shadow-sm border-0">
+                            <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">{{ product.name }}</h5>
+                                <p class="card-text">{{ product.description }}</p>
+                                <p class="price text-primary fs-4">₡{{ product.price }}</p>
+                                <a href="{% url 'productos' %}" class="btn btn-primary btn-sm">Comprar Ahora</a>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-            {% endfor %}
+                {% endfor %}
+            {% else %}
+                <p class="text-center">No hay productos destacados en este momento.</p>
+            {% endif %}
         </div>
     </section>
+    
 
     <!-- Special Offers Section -->
     <section class="py-5" style="background-color: #f8f9fa;">

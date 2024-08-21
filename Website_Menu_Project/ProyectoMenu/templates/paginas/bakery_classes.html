@@ -1,22 +1,58 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block titulo %}Clases de Panadería{% endblock %}
 
 {% block contenido %}
-    <div class="container mt-4">
-        <h1>Clases de Panadería</h1>
-        <div class="row">
-            {% for clase in bakery_classes %}
-                <div class="col-md-4 mb-4">
-                    <div class="product-card">
-                        <div class="card-body">
-                            <h2 class="card-title">{{ clase.name }}</h2>
-                            <p class="card-text">{{ clase.description }}</p>
-                            <p class="class-level">{{ clase.class_level }}</p>
-                        </div>
+<div class="container mt-4">
+    {% if user.is_staff or user.is_superuser %}
+        <div class="text-end mb-4">
+            <a href="{% url 'add_bakery_class' %}" class="btn btn-primary">Añadir Nueva Clase</a>
+        </div>
+    {% endif %}
+    <h1 class="text-center mb-4">Clases de Panadería</h1>
+
+    <!-- Displaying Each Bakery Class with Name, Date, Time, and Level -->
+    <div class="row">
+        {% for clase in bakery_classes %}
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 shadow-sm border-0">
+                    <div class="card-body">
+                        <h2 class="card-title text-center">{{ clase.name }}</h2>
+                        <p><strong>Fecha:</strong> {{ clase.date }}</p>
+                        <p><strong>Hora:</strong> {{ clase.time }}</p>
+                        <p class="text-center">
+                            <span class="badge bg-secondary">{{ clase.class_level }}</span>
+                        </p>
+                        <p>{{ clase.description }}</p>
                     </div>
                 </div>
-            {% endfor %}
-        </div>
+            </div>
+        {% endfor %}
     </div>
+    </section>
+
+    <!-- Class Gallery -->
+    <section class="mb-5">
+        <h2 class="text-center mb-4">Galería de Clases</h2>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm border-0">
+                    <img src="{% static 'images/class_1.webp' %}" class="card-img-top" alt="Clase 1">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm border-0">
+                    <img src="{% static 'images/class_2.webp' %}" class="card-img-top" alt="Clase 2">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm border-0">
+                    <img src="{% static 'images/class_3.png' %}" class="card-img-top" alt="Clase 3">
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
 {% endblock %}
+

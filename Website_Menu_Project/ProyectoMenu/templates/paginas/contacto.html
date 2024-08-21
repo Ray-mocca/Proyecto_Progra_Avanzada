@@ -4,48 +4,58 @@
 
 {% block contenido %}
     <div class="container mt-4">
-        <h1>Contacto</h1>
-        <p>Puedes ponerte en contacto con nosotros a través de los siguientes medios:</p>
-        <ul>
-            <li>Dirección: Purruja, Golfito, Costa Rica</li>
-            <li>Teléfono: +506 8394 8017</li>
-            <li>Email: correo@negocio.com</li>
-            <li>Redes sociales:
-                <ul>
-                    <li><a href="#">Facebook</a></li>
-                    <li><a href="#">Instagram</a></li>
-                    <li><a href="#">Twitter</a></li>
-                </ul>
-            </li>
-        </ul>
-        <form id="contact-form">
-            <div class="mb-3">
-                <label for="name" class="form-label">Nombre</label>
-                <input type="text" class="form-control" id="name" name="name" placeholder="Tu nombre" Required>
+        <h1 class="text-center mb-4">Contacto</h1>
+        <p class="text-center lead">Puedes ponerte en contacto con nosotros a través de los siguientes medios:</p>
+
+        <div class="row mb-5">
+            <div class="col-md-4">
+                <h5>Dirección</h5>
+                <p>Purruja, Golfito, Costa Rica</p>
             </div>
-            <div class="mb-3">
-                <label for="email" class="form-label">Email</label>
-                <input type="email" class="form-control" id="email" name="email" placeholder="Tu email" Required>
+            <div class="col-md-4">
+                <h5>Teléfono</h5>
+                <p>+506 8394 8017</p>
             </div>
-            <div class="mb-3">
-                <label for="message" class="form-label">Mensaje</label>
-                <textarea class="form-control" id="message" name="message" rows="3" placeholder="Tu mensaje" Required></textarea>
+            <div class="col-md-4">
+                <h5>Email</h5>
+                <p>correo@negocio.com</p>
             </div>
-            <button type="submit" class="btn btn-primary">Enviar</button>
-        </form>
+        </div>
+
+        <div class="row mb-5">
+            <div class="col-md-6 mx-auto">
+                <form id="contact-form" class="card p-4 shadow-sm border-0">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Nombre</label>
+                        <input type="text" class="form-control" id="name" name="name" placeholder="Tu nombre" Required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="Tu email" Required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="message" class="form-label">Mensaje</label>
+                        <textarea class="form-control" id="message" name="message" rows="3" placeholder="Tu mensaje" Required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">Enviar</button>
+                </form>
+            </div>
+        </div>
 
         <!-- Mapa de Google Maps -->
-        <h2 class="mt-4">Ubicación</h2>
-        <div id="map" style="height: 300px; width: 80%; margin: 20px auto;"></div>
+        <h2 class="text-center mb-4">Ubicación</h2>
+        <div id="map" class="rounded shadow-sm" style="height: 300px; width: 100%; margin: 20px auto;"></div>
     </div>
 
     <script type="text/javascript">
         document.getElementById('contact-form').addEventListener('submit', function(event) {
             event.preventDefault();
-
+    
+            emailjs.init('A3ebUrQHClBn4tl5Z'); // Initialize EmailJS with your user ID
+    
             const serviceID = 'service_xf3rqw1'; // Replace with your EmailJS service ID
             const templateID = 'template_72bdpqu'; // Replace with your EmailJS template ID
-
+    
             emailjs.sendForm(serviceID, templateID, this)
                 .then(function() {
                     alert('El mensaje ha sido enviado correctamente!');
@@ -53,6 +63,9 @@
                     alert('Error al enviar el mensaje: ' + JSON.stringify(error));
                 });
         });
+    </script>
+    
+    <script>
 
         function initMap() {
             // Define la ubicación del negocio
@@ -74,7 +87,6 @@
 
     <!-- Carga la API de Google Maps -->
     <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCtVmjeGBLeHvawKxc7lGe85JqIcQ0Vh_M
-&callback=initMap">
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCtVmjeGBLeHvawKxc7lGe85JqIcQ0Vh_M&callback=initMap">
     </script>
 {% endblock %}

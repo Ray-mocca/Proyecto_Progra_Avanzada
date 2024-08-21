@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block titulo %}Pedidos Personalizados{% endblock %}
+
+{% block contenido %}
+<div class="container mt-4">
+    <h1 class="mb-4 text-center">Pedidos Personalizados</h1>
+
+    <!-- Custom Cakes Gallery -->
+    <section class="mb-5">
+        <h2 class="text-center mb-4">Galería de Pasteles Personalizados</h2>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm border-0">
+                    <img src="{% static 'images/custom_cake_1.jpg' %}" class="card-img-top" alt="Pastel 1">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm border-0">
+                    <img src="{% static 'images/custom_cake_2.jpg' %}" class="card-img-top" alt="Pastel 2">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm border-0">
+                    <img src="{% static 'images/custom_cake_3.jpg' %}" class="card-img-top" alt="Pastel 3">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Customization Options -->
+    <section class="mb-5">
+        <h2 class="text-center mb-4">Opciones de Personalización</h2>
+        <div class="card shadow-sm border-0 p-4">
+            <p>Ofrecemos una amplia variedad de opciones de personalización para tus pasteles, desde sabores únicos hasta decoraciones especiales. Nuestro equipo está listo para trabajar contigo y crear un pastel que sea perfecto para tu evento.</p>
+            <ul>
+                <li>Sabores personalizados</li>
+                <li>Decoraciones temáticas</li>
+                <li>Tamaños y formas diversas</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Order Form -->
+    <section class="mb-5">
+        <h2 class="text-center mb-4">Haz tu Pedido</h2>
+        <div class="card shadow-sm border-0 p-4">
+            <form method="post" action="{% url 'contacto' %}">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="name" class="form-label">Nombre</label>
+                    <input type="text" class="form-control" id="name" name="name" placeholder="Tu nombre" required>
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="Tu email" required>
+                </div>
+                <div class="mb-3">
+                    <label for="cake_details" class="form-label">Detalles del Pastel</label>
+                    <textarea class="form-control" id="cake_details" name="cake_details" rows="3" placeholder="Describe cómo quieres tu pastel" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Realizar Pedido</button>
+            </form>
+        </div>
+    </section>
+</div>
+{% endblock %}

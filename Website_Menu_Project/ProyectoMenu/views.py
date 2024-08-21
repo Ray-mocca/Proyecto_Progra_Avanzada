@@ -2,7 +2,7 @@ from django import forms
 from django.db import IntegrityError
 from django.contrib import messages
 from django.contrib.admin.views.decorators import staff_member_required
-from django.contrib.auth import login
+from django.contrib.auth import login, update_session_auth_hash
 from django.contrib.auth import logout as auth_logout
 from django.contrib.auth.decorators import user_passes_test, login_required
 from django.contrib.auth.forms import AuthenticationForm
@@ -75,7 +75,7 @@ def profile(request):
 
 def inicio(request):
     featured_products = Product.objects.filter(featured=True)[:4]
-    return render(request, 'paginas/inicio.html')
+    return render(request, 'paginas/inicio.html', {'featured_products': featured_products})
 
 def productos(request):
     products = Product.objects.all()
@@ -151,6 +151,7 @@ def add_bakery_class(request):
         form = BakeryClassForm(request.POST)
         if form.is_valid():
             form.save()
+            messages.success(request, 'Clase añadida correctamente.')
             return redirect('bakery_classes')
     else:
         form = BakeryClassForm()
@@ -246,3 +247,27 @@ def orders_table(request):
         return redirect('inicio')
     orders = Purchase.objects.all().order_by('order_id')
     return render(request, 'paginas/tabla_pedidos.html', {'orders': orders})
+
+### View to change password
+from .forms import CustomPasswordChangeForm
+from django.contrib.auth import update_session_auth_hash
+@login_required
+def change_password(request):
+    print("Request method:", request.method)
+    if request.method == 'POST':
+        form = CustomPasswordChangeForm(user=request.user, data=request.POST)
+        if form.is_valid():
+            print("Form is valid")
+            user = form.save()
+            update_session_auth_hash(request, user)
+            return redirect('profile')
+        else:
+            print("Form errors:", form.errors)
+        # Si el formulario no es válido, vuelve a mostrar el formulario con errores
+        return render(request, 'paginas/change_password.html', {'form': form})
+    else:
+        form = CustomPasswordChangeForm(user=request.user)
+    
+    print("Rendering template")
+    # Asegúrate de que siempre se devuelve una respuesta
+    return render(request, 'paginas/change_password.html', {'form': form})

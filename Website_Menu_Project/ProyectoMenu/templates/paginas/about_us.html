@@ -1,5 +1,4 @@
 {% extends 'base.html' %}
-
 {% load static %}
 
 {% block titulo %}Sobre Nosotros{% endblock %}
@@ -9,16 +8,16 @@
     <!-- About Us Section -->
     <section class="mb-5">
         <div class="text-center">
-            <h1>Sobre Nosotros</h1>
+            <h1 class="mb-4">Sobre Nosotros</h1>
             <p class="lead">Descubre nuestra historia y pasión por la panadería.</p>
         </div>
         <div class="row mt-4">
             <div class="col-md-6">
-                <img src="{% static 'images/bakery_interior.jpg' %}" class="img-fluid" alt="Imagen de la panadería">
+                <img src="{% static 'images/bakery_interior.jpg' %}" class="img-fluid rounded shadow-sm" alt="Imagen de la panadería">
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 d-flex flex-column justify-content-center">
                 <h2>Nuestra Historia</h2>
-                <p>
+                <p class="mb-4">
                     Panadería Deliciosa comenzó en 2001 como un pequeño negocio familiar. Desde entonces, hemos crecido
                     gracias a la dedicación de nuestra familia y el apoyo de la comunidad. Nos especializamos en productos
                     frescos y artesanales, preparados con los mejores ingredientes.
@@ -35,22 +34,22 @@
     <!-- The Team Section -->
     <section class="mb-5">
         <div class="text-center">
-            <h2>El Equipo</h2>
+            <h2 class="mb-4">El Equipo</h2>
             <p class="lead">Conoce a las personas que hacen posible nuestros productos.</p>
         </div>
         <div class="row">
             <div class="col-md-4 text-center">
-                <img src="{% static 'images/team_member_1.jpg' %}" class="img-fluid rounded-circle mb-3" alt="Miembro del equipo 1">
+                <img src="{% static 'images/team_member_1.jpg' %}" class="img-fluid rounded-circle mb-3 shadow-sm" alt="Miembro del equipo 1">
                 <h4>Maria González</h4>
                 <p>Maestra Panadera</p>
             </div>
             <div class="col-md-4 text-center">
-                <img src="{% static 'images/team_member_2.jpg' %}" class="img-fluid rounded-circle mb-3" alt="Miembro del equipo 2">
+                <img src="{% static 'images/team_member_2.jpg' %}" class="img-fluid rounded-circle mb-3 shadow-sm" alt="Miembro del equipo 2">
                 <h4>Carlos Pérez</h4>
                 <p>Chef Pastelero</p>
             </div>
             <div class="col-md-4 text-center">
-                <img src="{% static 'images/team_member_3.jpg' %}" class="img-fluid rounded-circle mb-3" alt="Miembro del equipo 3">
+                <img src="{% static 'images/team_member_3.jpg' %}" class="img-fluid rounded-circle mb-3 shadow-sm" alt="Miembro del equipo 3">
                 <h4>Lucía Martínez</h4>
                 <p>Gerente General</p>
             </div>
@@ -60,28 +59,34 @@
     <!-- Our Values Section -->
     <section class="mb-5">
         <div class="text-center">
-            <h2>Nuestros Valores</h2>
+            <h2 class="mb-4">Nuestros Valores</h2>
             <p class="lead">Los principios que guían nuestro trabajo diario.</p>
         </div>
-        <div class="row">
+        <div class="row text-center">
             <div class="col-md-4">
-                <h4>Calidad</h4>
-                <p>
-                    Utilizamos ingredientes de la más alta calidad para asegurar que cada producto sea delicioso y fresco.
-                </p>
+                <div class="p-3 bg-light rounded shadow-sm">
+                    <h4>Calidad</h4>
+                    <p>
+                        Utilizamos ingredientes de la más alta calidad para asegurar que cada producto sea delicioso y fresco.
+                    </p>
+                </div>
             </div>
             <div class="col-md-4">
-                <h4>Innovación</h4>
-                <p>
-                    Nos encanta experimentar con nuevas recetas y técnicas para sorprender a nuestros clientes con
-                    sabores únicos.
-                </p>
+                <div class="p-3 bg-light rounded shadow-sm">
+                    <h4>Innovación</h4>
+                    <p>
+                        Nos encanta experimentar con nuevas recetas y técnicas para sorprender a nuestros clientes con
+                        sabores únicos.
+                    </p>
+                </div>
             </div>
             <div class="col-md-4">
-                <h4>Comunicación</h4>
-                <p>
-                    Valoramos la opinión de nuestros clientes y siempre estamos abiertos a sus sugerencias y comentarios.
-                </p>
+                <div class="p-3 bg-light rounded shadow-sm">
+                    <h4>Comunicación</h4>
+                    <p>
+                        Valoramos la opinión de nuestros clientes y siempre estamos abiertos a sus sugerencias y comentarios.
+                    </p>
+                </div>
             </div>
         </div>
     </section>
@@ -89,12 +94,12 @@
     <!-- Community Involvement Section -->
     <section class="mb-5">
         <div class="text-center">
-            <h2>Compromiso con la Comunidad</h2>
+            <h2 class="mb-4">Compromiso con la Comunidad</h2>
             <p class="lead">Apoyando a nuestra comunidad local.</p>
         </div>
         <div class="row">
             <div class="col-12">
-                <p>
+                <p class="bg-light p-3 rounded shadow-sm">
                     En Panadería Deliciosa, creemos en devolver a nuestra comunidad. Colaboramos con organizaciones
                     locales y participamos en eventos comunitarios para apoyar causas importantes. Nos esforzamos por
                     ser un miembro activo y positivo de nuestra comunidad, promoviendo la responsabilidad social y el

@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block titulo %}Catering para Eventos{% endblock %}
+
+{% block contenido %}
+<div class="container mt-4">
+    <h1 class="mb-4 text-center">Catering para Eventos</h1>
+
+    <!-- About Catering Services -->
+    <section class="mb-5">
+        <div class="card shadow-sm border-0 p-4">
+            <h2>Sobre nuestros servicios de catering</h2>
+            <p>Ofrecemos servicios de catering para todo tipo de eventos, desde bodas hasta reuniones de empresa. Nuestros menús personalizados están diseñados para satisfacer todos los gustos, utilizando ingredientes frescos y de la más alta calidad.</p>
+        </div>
+    </section>
+
+    <!-- Menu Options -->
+    <section class="mb-5">
+        <h2 class="text-center mb-4">Opciones de Menú</h2>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm border-0">
+                    <img src="{% static 'images/menu_1.webp' %}" class="card-img-top" alt="Menú 1">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Menú Clásico</h5>
+                        <p class="card-text">Una selección de nuestros productos de panadería más populares, perfectos para cualquier evento.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm border-0">
+                    <img src="{% static 'images/menu_2.jpeg' %}" class="card-img-top" alt="Menú 2">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Menú Gourmet</h5>
+                        <p class="card-text">Platos gourmet creados por nuestros chefs para ofrecer una experiencia culinaria única.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm border-0">
+                    <img src="{% static 'images/menu_3.png' %}" class="card-img-top" alt="Menú 3">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Menú Personalizado</h5>
+                        <p class="card-text">Creamos un menú completamente personalizado para adaptarse a los gustos y necesidades de tu evento.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Form -->
+    <section class="mb-5">
+        <h2 class="text-center mb-4">Solicita más información</h2>
+        <div class="card shadow-sm border-0 p-4">
+            <form method="post" action="{% url 'contacto' %}">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="name" class="form-label">Nombre</label>
+                    <input type="text" class="form-control" id="name" name="name" placeholder="Tu nombre" required>
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="Tu email" required>
+                </div>
+                <div class="mb-3">
+                    <label for="event_details" class="form-label">Detalles del Evento</label>
+                    <textarea class="form-control" id="event_details" name="event_details" rows="3" placeholder="Describe tu evento" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Enviar Solicitud</button>
+            </form>
+        </div>
+    </section>
+</div>
+{% endblock %}

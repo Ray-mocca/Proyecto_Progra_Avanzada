@@ -1,15 +1,39 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load form_tags %}
 
-{% block titulo %}Add Product{% endblock %}
+{% block titulo %}Añadir Producto{% endblock %}
 
 {% block contenido %}
 <div class="container mt-4">
-    <h1>Add Product</h1>
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="btn btn-primary">Add Product</button>
-    </form>
+    <h1 class="mb-4">Añadir Producto</h1>
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <form method="post" enctype="multipart/form-data" class="card shadow-sm border-0 p-4">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="id_name" class="form-label">Nombre del Producto</label>
+                    {{ form.name|add_class:"form-control" }}
+                </div>
+                <div class="mb-3">
+                    <label for="id_description" class="form-label">Descripción</label>
+                    {{ form.description|add_class:"form-control" }}
+                </div>
+                <div class="mb-3">
+                    <label for="id_price" class="form-label">Precio</label>
+                    {{ form.price|add_class:"form-control" }}
+                </div>
+                <div class="mb-3">
+                    <label for="id_image" class="form-label">Imagen del Producto</label>
+                    {{ form.image|add_class:"form-control" }}
+                </div>
+                <div class="form-check mb-3">
+                    {{ form.featured|add_class:"form-check-input" }}
+                    <label for="id_featured" class="form-check-label">Destacar este Producto</label>
+                </div>
+                <button type="submit" class="btn btn-primary btn-lg w-100">Añadir Producto</button>
+            </form>
+        </div>
+    </div>
 </div>
 {% endblock %}

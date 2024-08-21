@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block titulo %}Servicios de Entrega{% endblock %}
+
+{% block contenido %}
+<div class="container mt-4">
+    <h1 class="mb-4 text-center">Servicios de Entrega</h1>
+
+    <!-- Delivery Areas -->
+    <section class="mb-5">
+        <h2 class="text-center mb-4">Zonas de Entrega</h2>
+        <div class="card shadow-sm border-0 p-4">
+            <p>Ofrecemos servicios de entrega en las siguientes áreas:</p>
+            <ul>
+                <li>San José</li>
+                <li>Alajuela</li>
+                <li>Heredia</li>
+                <li>Cartago</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Delivery Charges -->
+    <section class="mb-5">
+        <h2 class="text-center mb-4">Tarifas de Entrega</h2>
+        <div class="card shadow-sm border-0 p-4">
+            <p>Nuestras tarifas de entrega se calculan según la distancia y el tamaño del pedido. A continuación se muestran las tarifas estándar:</p>
+            <ul>
+                <li>San José: ₡3,000</li>
+                <li>Alajuela: ₡3,500</li>
+                <li>Heredia: ₡3,500</li>
+                <li>Cartago: ₡4,000</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Delivery Request Form -->
+    <section class="mb-5">
+        <h2 class="text-center mb-4">Solicitar Entrega</h2>
+        <div class="card shadow-sm border-0 p-4">
+            <form method="post" action="{% url 'contacto' %}">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="name" class="form-label">Nombre</label>
+                    <input type="text" class="form-control" id="name" name="name" placeholder="Tu nombre" required>
+                </div>
+                <div class="mb-3">
+                    <label for="address" class="form-label">Dirección</label>
+                    <textarea class="form-control" id="address" name="address" rows="2" placeholder="Tu dirección de entrega" required></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="order_details" class="form-label">Detalles del Pedido</label>
+                    <textarea class="form-control" id="order_details" name="order_details" rows="3" placeholder="Describe tu pedido" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Solicitar Entrega</button>
+            </form>
+        </div>
+    </section>
+</div>
+{% endblock %}

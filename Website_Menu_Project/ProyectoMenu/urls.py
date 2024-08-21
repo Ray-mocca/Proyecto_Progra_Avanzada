@@ -1,6 +1,6 @@
 from django.urls import path, include
 from . import views
-from .views import CustomLoginView, register
+from .views import CustomLoginView, register, change_password
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.decorators import login_required
 
@@ -30,4 +30,5 @@ urlpatterns = [
     path('purchase_history/', views.purchase_history, name='purchase_history'),
     path('update_cart/', views.update_cart, name='update_cart'),
     path('orders/', views.orders_table, name='tabla_pedidos'),
+    path('change-password/', views.change_password, name='change_password'),
 ]

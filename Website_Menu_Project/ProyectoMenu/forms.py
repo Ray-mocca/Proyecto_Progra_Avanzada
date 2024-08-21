@@ -9,12 +9,22 @@ from django.core.validators import RegexValidator
 class ProductForm(forms.ModelForm):
     class Meta:
         model = Product
-        fields = ['name', 'description', 'price', 'image']
+        fields = ['name', 'description', 'price', 'image', 'featured']
+        widgets = {
+            'description': forms.Textarea(attrs={'rows': 4})
+        }
 
 class BakeryClassForm(forms.ModelForm):
     class Meta:
         model = BakeryClass
-        fields = ['name', 'description', 'class_level']
+        fields = ['name', 'description', 'date', 'time', 'class_level']
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-control'}),
+            'description': forms.Textarea(attrs={'class': 'form-control'}),
+            'date': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
+            'time': forms.TimeInput(attrs={'class': 'form-control', 'type': 'time', 'format': '%H:%M'}),
+            'class_level': forms.Select(attrs={'class': 'form-control'}),
+        }
 
 class CustomAuthenticationForm(AuthenticationForm):
     username = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Username'}))
@@ -72,3 +82,11 @@ class ProfileForm(forms.ModelForm):
         self.helper = FormHelper()
         self.helper.form_method = 'post'
         self.helper.add_input(Submit('submit', 'Update', css_class='btn btn-primary btn-block'))
+
+### Change password form
+from django.contrib.auth.forms import PasswordChangeForm
+
+class CustomPasswordChangeForm(PasswordChangeForm):
+    old_password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control'}))
+    new_password1 = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control'}))
+    new_password2 = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control'}))
