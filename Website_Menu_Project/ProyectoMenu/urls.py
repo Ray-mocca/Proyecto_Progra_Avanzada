@@ -31,4 +31,5 @@ urlpatterns = [
     path('update_cart/', views.update_cart, name='update_cart'),
     path('orders/', views.orders_table, name='tabla_pedidos'),
     path('change-password/', views.change_password, name='change_password'),
+    #path('remove_from_cart/<int:product_id>/', views.remove_from_cart, name='remove_from_cart'),
 ]

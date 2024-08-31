@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
-{% load cart_extras %} 
+{% load cart_extras %}
 
 {% block titulo %}Carrito de Compras{% endblock %}
 
@@ -10,37 +10,39 @@
     {% if cart_items %}
     <form method="post" action="{% url 'update_cart' %}">
         {% csrf_token %}
-        <table class="table table-hover table-bordered">
-            <thead class="table-dark">
-                <tr>
-                    <th>Producto</th>
-                    <th>Cantidad</th>
-                    <th>Precio Unitario</th>
-                    <th>Total</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for item in cart_items %}
-                <tr>
-                    <td>{{ item.product.name }}</td>
-                    <td>
-                        <input type="number" name="quantity_{{ item.product.id }}" value="{{ item.quantity }}" min="1" class="form-control w-50">
-                    </td>
-                    <td>₡{{ item.product.price|floatformat:2 }}</td>
-                    <td>₡{{ item.product.price|multiply:item.quantity|floatformat:2 }}</td>
-                    <td>
-                        <button type="submit" class="btn btn-primary btn-sm">Actualizar</button>
-                        <!-- Add remove button here if needed -->
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-        <div class="d-flex justify-content-end">
+        <div class="table-responsive">
+            <table class="table table-hover table-bordered">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Producto</th>
+                        <th>Cantidad</th>
+                        <th>Precio Unitario</th>
+                        <th>Total</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in cart_items %}
+                    <tr>
+                        <td>{{ item.product.name }}</td>
+                        <td>
+                            <input type="number" name="quantity_{{ item.product.id }}" value="{{ item.quantity }}" min="1" class="form-control w-100">
+                        </td>
+                        <td>₡{{ item.product.price|floatformat:2 }}</td>
+                        <td>₡{{ item.product.price|multiply:item.quantity|floatformat:2 }}</td>
+                        <td>
+                            <button type="submit" class="btn btn-primary btn-sm">Actualizar</button>
+                            <!-- Add remove button here if needed -->
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="d-flex justify-content-end mt-3">
             <h4>Total: ₡{{ total_price|floatformat:2 }}</h4>
         </div>
-        <div class="d-flex justify-content-end">
+        <div class="d-flex justify-content-end mt-3">
             <a href="{% url 'checkout' %}" class="btn btn-success btn-lg">Proceder al Pago</a>
         </div>
     </form>

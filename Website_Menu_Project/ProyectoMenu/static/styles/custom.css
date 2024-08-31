@@ -127,3 +127,13 @@ footer .btn-primary {
 footer .btn-primary:hover {
     background-color: #003a80;
 }
+
+/* Estilo para hacer la tabla más adaptable en pantallas pequeñas */
+.table-responsive {
+    overflow-x: auto;
+}
+
+/* Asegúrate de que los inputs sean más anchos en dispositivos móviles */
+.form-control {
+    width: 100%;
+}

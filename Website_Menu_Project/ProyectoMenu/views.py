@@ -272,3 +272,5 @@ def change_password(request):
     print("Rendering template")
     # Asegúrate de que siempre se devuelve una respuesta
     return render(request, 'paginas/change_password.html', {'form': form})
+
+
